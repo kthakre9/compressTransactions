@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import { saveAs } from 'file-saver';
 
 function App() {
   const [showModel, setShowModel] = useState(false);
@@ -50,6 +51,24 @@ function App() {
     });
   }
 
+  const compressTransactions = () => {
+    const transactions = [...payTableData, ...receiveTableData]
+    let totalCount = {};
+
+    transactions.forEach(({ counterParty, amount }) => {
+      if (counterParty in totalCount) {
+        totalCount[counterParty] = parseInt(totalCount[counterParty]) + parseInt(amount)
+      } else {
+        totalCount[counterParty] = parseInt(amount)
+      }
+    })
+
+    const cvsData = Object.assign({ 'CounterParty': "Amount" }, totalCount);
+    const printData = Object.entries(cvsData).map(entry => entry.join(',')).join('\n');
+
+    const blob = new Blob([printData], { type: 'text/csv' });
+    saveAs(blob)
+  }
 
   const addNewTransaction = () => {
     const requestOptions = {
@@ -116,7 +135,7 @@ function App() {
 
       <div className="transaction_action">
         <Button variant="primary" onClick={() => setShowModel(true)}>Add new Transaction</Button>
-        <Button variant="primary">Compress Transactions</Button>
+        <Button variant="primary" onClick={compressTransactions}>Compress Transactions</Button>
       </div>
 
       <Modal size="lg" show={showModel} onHide={() => setShowModel(false)}>
