@@ -1,3 +1,52 @@
 .App {
+  margin: 2rem;
+  border: 1px dashed black;
+  height: 90vh;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
+}
+
+.transaction_list {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.paying {
+  flex-grow: 1;
+}
+
+.paying p {
+  padding: 1rem;
+  border: 1px dashed black;
+}
+
+table {
+  width: 100%;
+}
+
+.receiving {
+  flex-grow: 1;
+}
+
+.receiving p {
+  padding: 1rem;
+  border: 1px dashed black;
+}
+
+.transaction_action {
+  margin: 2rem;
+}
+
+.transaction_action button {
+  width: 15rem;
+  height: 3rem;
+  border-radius: 8px;
+  margin: 1rem;
+  border: 1px dashed black;
+  color: #5447b5;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: transparent;
 }
