@@ -1,16 +1,44 @@
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import Button from 'react-bootstrap/Button';
-
-import CustomTable from './components/CustomTable';
-import jsonData from '../data.json';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
 
 function App() {
-  const [tableData, setTableData] = useState(jsonData);
   const [showModel, setShowModel] = useState(false);
+  const [payTableData, setPayTableData] = useState([]);
+  const [receiveTableData, setReceiveTableData] = useState([]);
   const [formData, setFormData] = useState({
     counterParty: "",
     amount: 0
   })
+
+  const groupTransactions = (data) => {
+    let payingTable = []
+    let receivingTable = []
+
+    data.forEach((item) => {
+      if (item.amount < 0) {
+        payingTable.push(item)
+      } else {
+        receivingTable.push(item)
+      }
+    })
+    setReceiveTableData(receivingTable)
+    setPayTableData(payingTable)
+
+  }
+
+  useEffect(() => {
+    fetch("/allTransactions")
+      .then((res) => res.json())
+      .then((data) => {
+        groupTransactions(data)
+      });
+  }, []);
 
   const handleClose = () => setShowModel(false);
 
@@ -22,11 +50,19 @@ function App() {
     });
   }
 
+
   const addNewTransaction = () => {
-    let tempList = [...tableData]
-    tempList.push(formData)
-    setTableData(tempList)
-    setShowModel(false)
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    };
+    fetch('/newTransaction', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        groupTransactions(data)
+        setShowModel(false)
+      });
   }
 
   return (
@@ -42,7 +78,7 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {tableData && tableData.length > 0 && tableData.map((data) => {
+              {payTableData && payTableData.length > 0 && payTableData.map((data) => {
                 return (
                   <tr>
                     <td>{data.counterParty}</td>
@@ -64,7 +100,7 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {tableData && tableData.length > 0 && tableData.map((data) => {
+              {receiveTableData && receiveTableData.length > 0 && receiveTableData.map((data) => {
                 return (
                   <tr>
                     <td>{data.counterParty}</td>
@@ -79,7 +115,7 @@ function App() {
       </div>
 
       <div className="transaction_action">
-        <Button variant="primary" onClick={() => setShowModel(true)} >Add new Transaction</Button>
+        <Button variant="primary" onClick={() => setShowModel(true)}>Add new Transaction</Button>
         <Button variant="primary">Compress Transactions</Button>
       </div>
 
