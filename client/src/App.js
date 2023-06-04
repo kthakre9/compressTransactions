@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import { saveAs } from 'file-saver';
+import { v4 as uuid } from 'uuid';
 
 function App() {
   const [showModel, setShowModel] = useState(false);
@@ -81,27 +82,32 @@ function App() {
       .then(data => {
         groupTransactions(data)
         setShowModel(false)
+        setFormData({
+          counterParty: "",
+          amount: 0
+        })
       });
   }
 
   return (
     <div className="App">
+      <h2>Transactions</h2>
       <div className="transaction_list">
         <div className="paying">
           <p>Paying</p>
-          <Table striped bordered hover>
+          <Table className="paying_table" bordered hover responsive>
             <thead>
-              <tr>
+              <tr key="paying_heading">
                 <th>Counterparty Name</th>
                 <th>Amount</th>
               </tr>
             </thead>
             <tbody>
-              {payTableData && payTableData.length > 0 && payTableData.map((data) => {
+              {payTableData && payTableData.length > 0 && payTableData.map(({ counterParty, amount }) => {
                 return (
-                  <tr>
-                    <td>{data.counterParty}</td>
-                    <td>{data.amount}</td>
+                  <tr key={`${uuid()}_paying`}>
+                    <td>{counterParty}</td>
+                    <td>{amount}</td>
                   </tr>
                 )
 
@@ -111,22 +117,21 @@ function App() {
         </div>
         <div className="receiving">
           <p>Receiving</p>
-          <Table striped bordered hover>
+          <Table className="receiving_table" bordered hover responsive>
             <thead>
-              <tr>
+              <tr key="receiving_header">
                 <th>Counterparty Name</th>
                 <th>Amount</th>
               </tr>
             </thead>
             <tbody>
-              {receiveTableData && receiveTableData.length > 0 && receiveTableData.map((data) => {
+              {receiveTableData && receiveTableData.length > 0 && receiveTableData.map(({ counterParty, amount }) => {
                 return (
-                  <tr>
-                    <td>{data.counterParty}</td>
-                    <td>{data.amount}</td>
+                  <tr key={`${uuid()}_receiving`}>
+                    <td>{counterParty}</td>
+                    <td>{amount}</td>
                   </tr>
                 )
-
               })}
             </tbody>
           </Table>
@@ -138,35 +143,35 @@ function App() {
         <Button variant="primary" onClick={compressTransactions}>Compress Transactions</Button>
       </div>
 
-      <Modal size="lg" show={showModel} onHide={() => setShowModel(false)}>
+      <Modal size="lg" show={showModel} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add new transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group as={Row} className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group as={Row} className="mb-3" id="Counterparty">
             <Form.Label column sm="2">Counterparty</Form.Label>
             <Col sm="10">
               <Form.Control name="counterParty" type="text" onChange={handleChange} value={formData.counterParty} />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group as={Row} className="mb-3" id="Tradingparty">
             <Form.Label column sm="2">Tradingparty</Form.Label>
             <Col sm="10">
               <Form.Control plaintext readOnly defaultValue="me" />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group as={Row} className="mb-3" id="Amount">
             <Form.Label column sm="2">Amount</Form.Label>
             <Col sm="10">
-              <Form.Control name="amount" type="text" onChange={handleChange} value={formData.amount} />
+              <Form.Control name="amount" type="number" onChange={handleChange} value={formData.amount} />
             </Col>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" id="cancel" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addNewTransaction}>
+          <Button variant="primary" disabled={!formData.counterParty && !formData.amount} id="saveTransaction" onClick={addNewTransaction}>
             Save Changes
           </Button>
         </Modal.Footer>

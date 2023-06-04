@@ -1,1 +1,26 @@
-[{"counterParty":"Counterparty 1","amount":100,"id":1},{"counterParty":"Counterparty 2","amount":-100,"id":2},{"counterParty":"Counterparty 3","amount":200,"id":3},{"counterParty":"Counterparty 4","amount":-10,"id":4},{"counterParty":"Counterparty 5","amount":20,"id":5},{"counterParty":"Counterparty 6","amount":-20,"id":6},{"counterParty":"Counterparty 4","amount":150,"id":7},{"counterParty":"Counterparty 3","amount":-320,"id":8},{"counterParty":"Counterparty 2","amount":200,"id":9},{"counterParty":"Counterparty 6","amount":-20,"id":10},{"counterParty":"counterparty8","amount":"2001"},{"counterParty":"counterparty4","amount":"-10"},{"counterParty":"Counterparty 4","amount":"-290"},{"counterParty":"Counterparty 2","amount":"100"},{"counterParty":"Counterparty 4","amount":"2002"},{"counterParty":"Counterparty 3","amount":"-90"},{"counterParty":"counterparty12345","amount":"2346"},{"counterParty":"counterparty12345","amount":"-920345"}]
+[
+  { "counterParty": "Counterparty 1", "amount": "100 " },
+  { "counterParty": "Counterparty 2", "amount": "-100" },
+  { "counterParty": "Counterparty 3", "amount": "200" },
+  { "counterParty": "Counterparty 4", "amount": "-10" },
+  { "counterParty": "Counterparty 5", "amount": "20" },
+  { "counterParty": "Counterparty 6", "amount": "-20" },
+  { "counterParty": "Counterparty 4", "amount": "150" },
+  { "counterParty": "Counterparty 3", "amount": "-320" },
+  { "counterParty": "Counterparty 2", "amount": "200" },
+  { "counterParty": "Counterparty 6", "amount": "-20" },
+  { "counterParty": "Counterparty 8", "amount": "2001" },
+  { "counterParty": "Counterparty 4", "amount": "-10" },
+  { "counterParty": "Counterparty 4", "amount": "-290" },
+  { "counterParty": "Counterparty 2", "amount": "100" },
+  { "counterParty": "Counterparty 4", "amount": "2002" },
+  { "counterParty": "Counterparty 3", "amount": "-90" },
+  { "counterParty": "Counterparty 12345", "amount": "2346" },
+  { "counterParty": "Counterparty 12345", "amount": "-920345" },
+  { "counterParty": "Counterparty 12345", "amount": "132335" },
+  { "counterParty": "Counterparty 4", "amount": "123" },
+  { "counterParty": "Counterparty 1", "amount": "-900" },
+  { "counterParty": "Counterparty 1", "amount": "-700" },
+  { "counterParty": "counterparty12345", "amount": "7" },
+  { "counterParty": "counterparty8", "amount": "-980" }
+]
