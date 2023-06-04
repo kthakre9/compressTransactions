@@ -27,6 +27,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
   
   ```
 $ cd client/
-$ npm run cy:open
+$ npx cypress open
 ```
 Opens the cypress Launchpad. Select Testing Type "E2E" and choose your preferred browser.  
