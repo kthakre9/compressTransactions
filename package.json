@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "React App",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

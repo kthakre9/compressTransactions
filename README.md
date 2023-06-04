@@ -3,6 +3,7 @@
 ## Server setup
 
 In the project directory, you can run:
+
 ```
 $ npm install
 $ npm start
@@ -11,8 +12,7 @@ $ npm start
 Starts the express server.\
 Open [http://localhost:5001](http://localhost:5001) to view it in your browser.
 
-
-  ## Client setup
+## Client setup
 
 ```
 $ cd client/
@@ -23,10 +23,11 @@ $ npm start
 Starts the react app.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-  ## Running tests
-  
-  ```
-$ cd client/
-$ npx cypress open
+## Running tests
+
 ```
-Opens the cypress Launchpad. Select Testing Type "E2E" and choose your preferred browser.  
+$ cd client/
+$ npm run cy:open
+```
+
+Opens the cypress Launchpad. Select Testing Type "E2E" and choose your preferred browser.
